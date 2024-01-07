@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 error!</title>
+</head>
+<body>
+    <div class="row">
+        <div class="col-6 offset-3">
+            <div class="alert alert-danger" role="alert">
+                <h4 class="alert-heading"><%= err.message %> - <%= err.statusCode %></h4>
+                <img src="https://img.freepik.com/free-vector/404-error-background-flat-style_23-2147763208.jpg?w=740&t=st=1704662096~exp=1704662696~hmac=7c928c36642ca00c5b190ba9e6859f09b646649ad8d3db0a20ea4372f95fde34" alt="">
+                <hr>
+                <p><%= err.stack %></p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
