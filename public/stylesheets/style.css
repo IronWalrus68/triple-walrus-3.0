@@ -1,0 +1,106 @@
+body {
+  margin: 0;
+  height: 100vh;
+  background: linear-gradient(to bottom, #5e005e, #fd2c4f, #fd2c4f, #fd2c4f, black, black, #fd2c4f, #5e005e);
+}
+
+#Accent {
+  font-size: 9vw;
+  position: absolute;
+  margin: 0;
+  font-family: Brush Script MT;
+  color: black;
+}
+
+#title {
+  font-size: 8.7vw;
+  position: absolute;
+  margin: 0;
+  font-family: Brush Script MT;
+  color: hotpink;
+  text-shadow: 0 0 10px rgba(236, 226, 86, 0.5);
+  transition: text-shadow 0.5s;
+}
+
+#title:hover {
+  text-shadow: 0 0 10px rgba(236, 226, 86);
+}
+
+#bodyWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#slotMachineBackboard {
+  margin-top: 4.5vw;
+  height: 85vh;
+  width: 85vw;
+  background-color: rgba(0, 0, 0, 0.7);
+  border-radius: 70px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#reelHoldster {
+  height: 60vh;
+  width: 75vw;
+  margin-top: 5vh;
+  background-color: rgba(71, 120, 255, 1);
+}
+
+#uiInline {
+  height: 13vh;
+  width: 75vw;
+  margin-top: 3vh;
+  border-radius: 20px;
+  background-color: #ffed47;
+}
+
+#uiInline {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.winsCollum{
+  font-family: Helvetica;
+  display: flex;
+  flex-direction: column;
+  height: 10vh;
+  justify-content: space-around;
+}
+
+#tokenInput {
+  width: 50px; /* Adjust the width based on your preference */
+  padding: 8px;
+  font-size: 1em;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  outline: none; /* Remove the default focus outline */
+}
+
+#tokenInput:hover,
+#tokenInput:focus {
+  border-color: #6c63ff; /* Change the border color on hover and focus */
+}
+
+#spinButton {
+  font-size: 2em;
+  width: 12vw;
+  height: 12vw;
+  border-radius: 100px;
+  background-color: hotpink;
+  border: 10px solid #ffed47;
+  transition: box-shadow 0.5s; /* Smooth transition effect */
+
+}
+
+#spinButton:hover {
+  box-shadow: 0 0 10px 5px #ffffff;
+}
+
+#spinButton:active {
+  transform: scale(0.95); /* Adjust the scale value based on your preference */
+}
