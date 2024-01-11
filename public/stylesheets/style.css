@@ -43,13 +43,6 @@ body {
   align-items: center;
 }
 
-#reelHoldster {
-  height: 60vh;
-  width: 75vw;
-  margin-top: 5vh;
-  background-color: rgba(71, 120, 255, 1);
-}
-
 #uiInline {
   height: 13vh;
   width: 75vw;
@@ -103,4 +96,246 @@ body {
 
 #spinButton:active {
   transform: scale(0.95); /* Adjust the scale value based on your preference */
+}
+
+/* reels */
+#reelHoldster {
+  height: 60vh;
+  width: 75vw;
+  margin-top: 5vh;
+  background-color: rgba(71, 120, 255, 1);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.reels{
+  border: 1px solid black;
+  height: 55vh;
+  width: 20vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.reelSymbal{
+height: 20px;
+width: 20px;
+position: absolute;
+}
+.animation1{
+background-color: red;
+  animation: spin1 2s forwards;
+}
+.animation2{
+background-color: green;
+  animation: spin2 2s forwards;
+}
+.animation3{
+background-color: blue;
+  animation: spin3 2s forwards;
+}
+.animation4{
+background-color: yellow;
+  animation: spin4 2s forwards;
+  
+}
+.animation5{
+background-color: pink;
+  animation: spin5 2s forwards;
+  
+}
+
+@keyframes spin1 {
+  /* reelHolster is 55vh, the animation should go from 0 to 20vh to -20vh */
+  0%{
+    transform: translateY(0vh);
+  }
+  10%{
+    transform: translateY(10vh);
+
+  }
+  20%{
+    transform: translateY(20vh);
+  }
+  30%{
+    transform: translateY(-20vh);
+  }
+  40%{
+    transform: translateY(-10vh);
+  }
+  50%{
+    transform: translateY(0vh);
+  }
+  60%{
+    transform: translateY(10vh);
+  }
+  70%{
+    transform: translateY(20vh);
+
+  }
+  80%{
+    transform: translateY(-20vh);
+  }
+  90%{
+    transform: translateY(-10vh);
+  }
+  100%{
+    transform: translateY(0vh);
+    display: none;
+  }
+}
+
+@keyframes spin2 {
+  0%{
+    transform: translateY(10vh);
+  }
+  10%{
+    transform: translateY(20vh);
+
+  }
+  20%{
+    transform: translateY(-20vh);
+  }
+  30%{
+    transform: translateY(-10vh);
+  }
+  40%{
+    transform: translateY(0vh);
+  }
+  50%{
+    transform: translateY(10vh);
+  }
+  60%{
+    transform: translateY(20vh);
+  }
+  70%{
+    transform: translateY(-20vh);
+
+  }
+  80%{
+    transform: translateY(-10vh);
+  }
+  90%{
+    transform: translateY(0vh);
+  }
+  100%{
+    transform: translateY(10vh);
+  }
+}
+
+@keyframes spin3 {
+  0%{
+    transform: translateY(20vh);
+  }
+  10%{
+    transform: translateY(-20vh);
+
+  }
+  20%{
+    transform: translateY(-10vh);
+  }
+  30%{
+    transform: translateY(0vh);
+  }
+  40%{
+    transform: translateY(10vh);
+  }
+  50%{
+    transform: translateY(20vh);
+  }
+  60%{
+    transform: translateY(-20vh);
+  }
+  70%{
+    transform: translateY(-10vh);
+
+  }
+  80%{
+    transform: translateY(0vh);
+  }
+  90%{
+    transform: translateY(10vh);
+  }
+  100%{
+    transform: translateY(20vh);
+  }
+}
+
+@keyframes spin4 {
+  0%{
+    transform: translateY(-20vh);
+  }
+  10%{
+    transform: translateY(-10vh);
+
+  }
+  20%{
+    transform: translateY(0vh);
+  }
+  30%{
+    transform: translateY(10vh);
+  }
+  40%{
+    transform: translateY(20vh);
+  }
+  50%{
+    transform: translateY(-20vh);
+  }
+  60%{
+    transform: translateY(-10vh);
+  }
+  70%{
+    transform: translateY(0vh);
+
+  }
+  80%{
+    transform: translateY(10vh);
+  }
+  90%{
+    transform: translateY(20vh);
+  }
+  100%{
+    transform: translateY(-20vh);
+  }
+}
+
+@keyframes spin5 {
+  0%{
+    transform: translateY(-10vh);
+  }
+  10%{
+    transform: translateY(0vh);
+
+  }
+  20%{
+    transform: translateY(10vh);
+  }
+  30%{
+    transform: translateY(20vh);
+  }
+  40%{
+    transform: translateY(-20vh);
+  }
+  50%{
+    transform: translateY(-10vh);
+  }
+  60%{
+    transform: translateY(0vh);
+  }
+  70%{
+    transform: translateY(10vh);
+
+  }
+  80%{
+    transform: translateY(20vh);
+  }
+  90%{
+    transform: translateY(-20vh);
+  }
+  100%{
+    transform: translateY(-10vh);
+  }
 }
