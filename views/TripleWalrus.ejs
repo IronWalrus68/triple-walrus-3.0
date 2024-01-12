@@ -9,56 +9,71 @@
 </head>
 
 <body>
-                <form action="">
-    <div id="bodyWrapper">
-        <h1 id="Accent">Triple Walrus</h1>
-        <h1 id="title">Triple Walrus</h1>
-        <div id="slotMachineBackboard">
-            <div id="reelHoldster">
-                <div class="reels">
-                    <div id="winLine1"></div>
-                    <div class="reelSymbal animation1"></div>
-                    <div class="reelSymbal animation2"></div>
-                    <div class="reelSymbal animation3"></div>
-                    <div class="reelSymbal animation4"></div>
-                    <div class="reelSymbal animation5"></div>
+    <form action="">
+        <div id="bodyWrapper">
+            <h1 id="Accent">Triple Walrus</h1>
+            <h1 id="title">Triple Walrus</h1>
+            <div id="slotMachineBackboard">
+                <div id="reelHoldster">
+                    <div class="reels">
+                        <div id="winLine1"></div>
+                        <div class="reelSymbal animation1"></div>
+                        <div class="reelSymbal animation2"></div>
+                        <div class="reelSymbal animation3"></div>
+                        <div class="reelSymbal animation4"></div>
+                        <div class="reelSymbal animation5"></div>
+                    </div>
+                    <div class="reels">
+                        <div id="winLine2"></div>
+                        <div class="reelSymbal animation1"></div>
+                        <div class="reelSymbal animation2"></div>
+                        <div class="reelSymbal animation3"></div>
+                        <div class="reelSymbal animation4"></div>
+                        <div class="reelSymbal animation5"></div>
+                    </div>
+                    <div class="reels">
+                        <div id="winLine3"></div>
+                        <div class="reelSymbal animation1"></div>
+                        <div class="reelSymbal animation2"></div>
+                        <div class="reelSymbal animation3"></div>
+                        <div class="reelSymbal animation4"></div>
+                        <div class="reelSymbal animation5"></div>
+                    </div>
                 </div>
-                <div class="reels">
-                    <div id="winLine2"></div>
-                    <div class="reelSymbal animation1"></div>
-                    <div class="reelSymbal animation2"></div>
-                    <div class="reelSymbal animation3"></div>
-                    <div class="reelSymbal animation4"></div>
-                    <div class="reelSymbal animation5"></div>
+                <div id="uiInline">
+                    <div class="winsCollum">
+                        <div>
+                            <div>Last Win:</div>
+                            <div>%wins%</div>
+                        </div>
+                        <div>
+                            <div>Total Winnings:</div>
+                            <div>%tWins%</div>
+                        </div>
+                    </div>
+                    <button disabled id="spinButton">Spin!</button>
+                    <script>
+                        document.addEventListener('DOMContentLoaded', function () {
+                            var spinButton = document.getElementById('spinButton');
+
+                            setTimeout(function () {
+                                spinButton.removeAttribute('disabled');
+                            }, 2000);
+                        });
+                    </script>
+                    <div class="winsCollum">
+                        <div>Current Bet</div>
+                        <input type="number" value="1" id="tokenInput" min="1" max="5">
+                    </div>
+                    <div class="winsCollum">
+                        <div>Tokens</div>
+                        %currentTokens%
+                    </div>
                 </div>
-                <div class="reels">
-                    <div id="winLine3"></div>
-                    <div class="reelSymbal animation1"></div>
-                    <div class="reelSymbal animation2"></div>
-                    <div class="reelSymbal animation3"></div>
-                    <div class="reelSymbal animation4"></div>
-                    <div class="reelSymbal animation5"></div>
-                </div>
-            </div>
-            <div id="uiInline">
-                <div class="winsCollum">
-                    <div><div>Last Win:</div> <div>%wins%</div></div>
-                    <div><div>Total Winnings:</div> <div>%tWins%</div></div>
-                </div>
-            <button id="spinButton">Spin!</button>
-            <div class="winsCollum">
-                <div>Current Bet</div>
-                <input type="number" value="1" id="tokenInput" min="1" max="5">
-            </div>
-            <div class="winsCollum">
-                <div>Tokens</div>
-                %currentTokens%
-            </div>
             </div>
         </div>
-    </div>
-    </div>
-                </form>
+        </div>
+    </form>
 </body>
 
 </html>
