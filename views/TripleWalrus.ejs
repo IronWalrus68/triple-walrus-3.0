@@ -12,7 +12,7 @@
 </head>
 
 <body>
-    <form action="">
+    <form action="/" method="post">
         <div id="bodyWrapper">
             <h1 id="Accent">Triple Walrus</h1>
             <h1 id="title">Triple Walrus</h1>
@@ -70,18 +70,9 @@
                         </div>
                     </div>
                     <button disabled id="spinButton">Spin!</button>
-                    <script>
-                        document.addEventListener('DOMContentLoaded', function () {
-                            var spinButton = document.getElementById('spinButton');
-
-                            setTimeout(function () {
-                                spinButton.removeAttribute('disabled');
-                            }, 2000);
-                        });
-                    </script>
                     <div class="winsCollum">
                         <div>Current Bet</div>
-                        <input type="number" value="1" id="tokenInput" min="1" max="5">
+                        <input type="number" value="1" id="tokenInput" name="tokenInput" min="1" max="5" required>
                     </div>
                     <div class="winsCollum">
                         <div>Tokens</div>
@@ -92,6 +83,15 @@
         </div>
         </div>
     </form>
+                    <script>
+                        document.addEventListener('DOMContentLoaded', function () {
+                            var spinButton = document.getElementById('spinButton');
+
+                            setTimeout(function () {
+                                spinButton.removeAttribute('disabled');
+                            }, 5000);
+                        });
+                    </script>
 </body>
 
 </html>
