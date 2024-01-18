@@ -19,79 +19,91 @@
             <div id="slotMachineBackboard">
                 <div id="reelHoldster">
                     <div class="reels">
-                        <div id="winLine1">Spin</div>
-                        <div class="reelSymbal animation1"></div>
-                        <div class="reelSymbal animation2"></div>
-                        <div class="reelSymbal animation3"></div>
-                        <div class="reelSymbal animation4"></div>
-                        <div class="reelSymbal animation5"></div>
-                        <div class="reelSymbal animation6"></div>
-                        <div class="reelSymbal animation7"></div>
-                        <div class="reelSymbal animation8"></div>
-                        <div class="reelSymbal animation9"></div>
-                        <div class="reelSymbal animation10"></div>
+                        <div id="winLine1" class="winLine"><%= firstSpin %></div>
+                        <div class="reelSymbal animation1">~</div>
+                        <div class="reelSymbal animation2">🍒</div>
+                        <div class="reelSymbal animation3">~</div>
+                        <div class="reelSymbal animation4">🦭</div>
+                        <div class="reelSymbal animation5">~</div>
+                        <div class="reelSymbal animation6">🍫🍫</div>
+                        <div class="reelSymbal animation7">~</div>
+                        <div class="reelSymbal animation8">🍫🍫🍫</div>
+                        <div class="reelSymbal animation9">~</div>
+                        <div class="reelSymbal animation10">🍇</div>
                     </div>
                     <div class="reels">
-                        <div id="winLine2">To</div>
-                        <div class="reelSymbal animation11"></div>
-                        <div class="reelSymbal animation12"></div>
-                        <div class="reelSymbal animation13"></div>
-                        <div class="reelSymbal animation14"></div>
-                        <div class="reelSymbal animation15"></div>
-                        <div class="reelSymbal animation16"></div>
-                        <div class="reelSymbal animation17"></div>
-                        <div class="reelSymbal animation18"></div>
-                        <div class="reelSymbal animation19"></div>
-                        <div class="reelSymbal animation20"></div>
+                        <div id="winLine2" class="winLine"><%= SecondSpin %></div>
+                        <div class="reelSymbal animation11">~</div>
+                        <div class="reelSymbal animation12">~</div>
+                        <div class="reelSymbal animation13">🍇</div>
+                        <div class="reelSymbal animation14">🦭</div>
+                        <div class="reelSymbal animation15">~</div>
+                        <div class="reelSymbal animation16">🍫🍫🍫</div>
+                        <div class="reelSymbal animation17">~</div>
+                        <div class="reelSymbal animation18">🍒</div>
+                        <div class="reelSymbal animation19">🍫</div>
+                        <div class="reelSymbal animation20">~</div>
                     </div>
                     <div class="reels">
-                        <div id="winLine3">Play!</div>
-                        <div class="reelSymbal animation21"></div>
-                        <div class="reelSymbal animation22"></div>
-                        <div class="reelSymbal animation23"></div>
-                        <div class="reelSymbal animation24"></div>
-                        <div class="reelSymbal animation25"></div>
-                        <div class="reelSymbal animation26"></div>
-                        <div class="reelSymbal animation27"></div>
-                        <div class="reelSymbal animation28"></div>
-                        <div class="reelSymbal animation29"></div>
-                        <div class="reelSymbal animation30"></div>
+                        <div id="winLine3" class="winLine"><%= ThirdSpin %></div>
+                        <div class="reelSymbal animation21">~</div>
+                        <div class="reelSymbal animation22">🍇</div>
+                        <div class="reelSymbal animation23">~</div>
+                        <div class="reelSymbal animation24">🦭</div>
+                        <div class="reelSymbal animation25">~</div>
+                        <div class="reelSymbal animation26">🍫🍫🍫</div>
+                        <div class="reelSymbal animation27">~</div>
+                        <div class="reelSymbal animation28">🍫</div>
+                        <div class="reelSymbal animation29">~</div>
+                        <div class="reelSymbal animation30">🍒</div>
                     </div>
                 </div>
                 <div id="uiInline">
                     <div class="winsCollum">
                         <div>
                             <div>Last Win:</div>
-                            <div>%wins%</div>
+                            <div><%= lastWin %></div>
                         </div>
                         <div>
                             <div>Total Winnings:</div>
-                            <div>%tWins%</div>
+                            <div><%= totalWinnins %></div>
                         </div>
                     </div>
                     <button disabled id="spinButton">Spin!</button>
                     <div class="winsCollum">
                         <div>Current Bet</div>
-                        <input type="number" value="1" id="tokenInput" name="tokenInput" min="1" max="5" required>
+                        <input type="number" value="<%= lastBet %>" id="tokenInput" name="tokenInput" min="1" max="5" required>
                     </div>
                     <div class="winsCollum">
                         <div>Tokens</div>
-                        <%= data.tokens %>
+                        <%= tokenValue %>
                     </div>
                 </div>
             </div>
         </div>
         </div>
     </form>
-                    <script>
-                        document.addEventListener('DOMContentLoaded', function () {
-                            var spinButton = document.getElementById('spinButton');
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var spinButton = document.getElementById('spinButton');
 
-                            setTimeout(function () {
-                                spinButton.removeAttribute('disabled');
-                            }, 5000);
-                        });
-                    </script>
+            setTimeout(function () {
+                spinButton.removeAttribute('disabled');
+            }, 5000);
+        });
+        document.addEventListener('DOMContentLoaded', function() {
+      // Add a yellow border to winLine after 5 seconds if hasWon is true
+      if (window.hasWon) {
+        setTimeout(function() {
+          var winLines = document.getElementsByClassName('winLine');
+          for (var i = 0; i < winLines.length; i++) {
+            winLines[i].style.border = '2px solid yellow';
+            winLines[i].style.backgroundColor = 'red'; // Change background color if needed
+          }
+        }, 5000); // 5000 milliseconds (5 seconds)
+      }
+    });
+    </script>
 </body>
 
 </html>

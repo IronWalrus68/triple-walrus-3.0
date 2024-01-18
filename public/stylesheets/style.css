@@ -121,11 +121,11 @@ body {
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  font-size: 2em;
 }
 
 .reelSymbal{
 height: 20px;
-width: 20px;
 position: absolute;
 }
 

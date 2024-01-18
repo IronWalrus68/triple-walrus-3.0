@@ -3,43 +3,33 @@
 }
 
 .animation1{
-background-color: red;
   animation: spin1 3s forwards;
 }
 .animation2{
-background-color: rgb(255, 174, 0);
   animation: spin2 3s forwards;
 }
 .animation3{
-background-color: rgb(255, 251, 0);
   animation: spin3 3s forwards;
 }
 .animation4{
-background-color: rgb(60, 255, 0);
   animation: spin4 3s forwards;
 }
 .animation5{
-background-color: rgb(0, 255, 255);
   animation: spin5 3s forwards;
 }
 .animation6{
-background-color: rgb(17, 0, 255);
   animation: spin6 3s forwards;
 }
 .animation7{
-background-color: rgb(162, 0, 255);
   animation: spin7 3s forwards;
 }
 .animation8{
-background-color: rgb(255, 0, 221);
   animation: spin8 3s forwards;
 }
 .animation9{
-background-color: rgb(0, 0, 0);
   animation: spin9 3s forwards;
 }
 .animation10{
-background-color: rgb(255, 255, 255);
   animation: spin10 3s forwards;
 }
 
