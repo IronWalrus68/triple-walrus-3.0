@@ -7,8 +7,8 @@ const bodyParser = require('body-parser');
 let tokenValue = 100;
 let buyIn = 1;
 let firstSpin = 'Spin';
-let SecondSpin = 'To';
-let ThirdSpin = 'Play!';
+let secondSpin = 'To';
+let thirdSpin = 'Play!';
 let lastWin = 0
 let lastBet = 1
 let totalWinnins = 0
@@ -28,10 +28,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 //routes
 //home/main
 app.get('/', (req, res) => {
-    res.render("TripleWalrus", {tokenValue, firstSpin, SecondSpin, ThirdSpin, lastWin, lastBet, totalWinnins})
+    res.render("TripleWalrus", {tokenValue, firstSpin, secondSpin, thirdSpin, lastWin, lastBet, totalWinnins})
 firstSpin = 'Spin';
-SecondSpin = 'To';
-ThirdSpin = 'Play!';
+secondSpin = 'To';
+thirdSpin = 'Play!';
 hasWon = false
 })
 
@@ -44,11 +44,9 @@ app.post('/', (req, res) => {
 if(buyIn > tokenValue) {
     return res.send('out of tokens!')
 }
-    console.log(`buy in: ${buyIn}`)
     tokenValue = tokenValue - buyIn;
     // run game
     start()
-    console.log(`new token value: ${tokenValue}`)
     res.redirect('/')
 })
 
@@ -69,7 +67,7 @@ app.listen(PORT, () => {
 });
 
 //start of game 
-const VReel1 = {
+const vReel1 = {
     1:'~',
     2:'~',
     3:'🍫',
@@ -103,7 +101,7 @@ const VReel1 = {
     31:'~',
     32:'🍒',
 }
-const VReel2 = {
+const vReel2 = {
     1:'~',
     2:'~',
     3:'🍫',
@@ -137,7 +135,7 @@ const VReel2 = {
     31:'~',
     32:'🦭',
 }
-const VReel3 = {
+const vReel3 = {
     1:'~',
     2:'~',
     3:'🍫',
@@ -179,67 +177,65 @@ function randomNumberGenerator(num) {
 }
 
 function returnScore(scoreMultiplier) {
- // update the users score
- console.log('Winner!')
+ // update the users score and other stats
  tokenValue = buyIn * scoreMultiplier + tokenValue;
- console.log(`Score after muliplier: ${tokenValue}`)
  lastWin = buyIn * scoreMultiplier
  lastBet = buyIn
  totalWinnins = buyIn * scoreMultiplier + totalWinnins
  hasWon = true
 }
 
-function isWin(firstSpin, SecondSpin, ThirdSpin) {
+function isWin(firstSpin, secondSpin, thirdSpin) {
     switch (true) {
-    case firstSpin === '🦭' && SecondSpin === '🦭' && ThirdSpin === '🦭':
+    case firstSpin === '🦭' && secondSpin === '🦭' && thirdSpin === '🦭':
         returnScore(500);
         break;
 
-    case firstSpin === '🍫🍫🍫' && SecondSpin === '🍫🍫🍫' && ThirdSpin === '🍫🍫🍫':
+    case firstSpin === '🍫🍫🍫' && secondSpin === '🍫🍫🍫' && thirdSpin === '🍫🍫🍫':
       returnScore(40);
       break;
 
-    case (firstSpin === '🍫🍫🍫' && SecondSpin === '🍫🍫🍫') || (SecondSpin === '🍫🍫🍫' && ThirdSpin === '🍫🍫🍫') || (firstSpin === '🍫🍫🍫' && ThirdSpin === '🍫🍫🍫'):
+    case (firstSpin === '🍫🍫🍫' && secondSpin === '🍫🍫🍫') || (secondSpin === '🍫🍫🍫' && thirdSpin === '🍫🍫🍫') || (firstSpin === '🍫🍫🍫' && thirdSpin === '🍫🍫🍫'):
       returnScore(20);
       break;
 
-    case firstSpin === '🍫🍫' && SecondSpin === '🍫🍫' && ThirdSpin === '🍫🍫':
+    case firstSpin === '🍫🍫' && secondSpin === '🍫🍫' && thirdSpin === '🍫🍫':
       returnScore(20);
       break;
 
-    case (firstSpin === '🍫🍫' && SecondSpin === '🍫🍫') || (SecondSpin === '🍫🍫' && ThirdSpin === '🍫🍫') || (firstSpin === '🍫🍫' && ThirdSpin === '🍫🍫'):
+    case (firstSpin === '🍫🍫' && secondSpin === '🍫🍫') || (secondSpin === '🍫🍫' && thirdSpin === '🍫🍫') || (firstSpin === '🍫🍫' && thirdSpin === '🍫🍫'):
       returnScore(10);
       break;
 
-    case firstSpin === '🍫' && SecondSpin === '🍫' && ThirdSpin === '🍫':
+    case firstSpin === '🍫' && secondSpin === '🍫' && thirdSpin === '🍫':
       returnScore(10);
       break;
 
-    case (firstSpin === '🍫' && SecondSpin === '🍫') || (SecondSpin === '🍫' && ThirdSpin === '🍫') || (firstSpin === '🍫' && ThirdSpin === '🍫'):
+    case (firstSpin === '🍫' && secondSpin === '🍫') || (secondSpin === '🍫' && thirdSpin === '🍫') || (firstSpin === '🍫' && thirdSpin === '🍫'):
       returnScore(5);
       break;
 
-    case firstSpin === '🍇' && SecondSpin === '🍇' && ThirdSpin === '🍇':
+    case firstSpin === '🍇' && secondSpin === '🍇' && thirdSpin === '🍇':
       returnScore(6);
       break;
 
-    case (firstSpin === '🍇' && SecondSpin === '🍇') || (SecondSpin === '🍇' && ThirdSpin === '🍇') || (firstSpin === '🍇' && ThirdSpin === '🍇'):
+    case (firstSpin === '🍇' && secondSpin === '🍇') || (secondSpin === '🍇' && thirdSpin === '🍇') || (firstSpin === '🍇' && thirdSpin === '🍇'):
       returnScore(4);
       break;
 
-    case firstSpin === '🍇' || SecondSpin === '🍇' || ThirdSpin === '🍇':
+    case firstSpin === '🍇' || secondSpin === '🍇' || thirdSpin === '🍇':
       returnScore(2);
       break;
 
-    case firstSpin === '🍒' && SecondSpin === '🍒' && ThirdSpin === '🍒':
+    case firstSpin === '🍒' && secondSpin === '🍒' && thirdSpin === '🍒':
       returnScore(3);
       break;
 
-    case (firstSpin === '🍒' && SecondSpin === '🍒') || (SecondSpin === '🍒' && ThirdSpin === '🍒') || (firstSpin === '🍒' && ThirdSpin === '🍒'):
+    case (firstSpin === '🍒' && secondSpin === '🍒') || (secondSpin === '🍒' && thirdSpin === '🍒') || (firstSpin === '🍒' && thirdSpin === '🍒'):
       returnScore(2);
       break;
 
-    case firstSpin === '🍒' || SecondSpin === '🍒' || ThirdSpin === '🍒':
+    case firstSpin === '🍒' || secondSpin === '🍒' || thirdSpin === '🍒':
       returnScore(1);
       break;
     default:
@@ -248,15 +244,12 @@ function isWin(firstSpin, SecondSpin, ThirdSpin) {
 }
 
 function respin() {
-  firstSpin = VReel1[randomNumberGenerator(32)]
-  SecondSpin = VReel2[randomNumberGenerator(32)]
-  ThirdSpin = VReel3[randomNumberGenerator(32)]
+  firstSpin = vReel1[randomNumberGenerator(32)]
+  secondSpin = vReel2[randomNumberGenerator(32)]
+  thirdSpin = vReel3[randomNumberGenerator(32)]
 }
 
 function start() {
     respin()
-    console.log(firstSpin)
-    console.log(SecondSpin)
-    console.log(ThirdSpin)
-    isWin(firstSpin, SecondSpin, ThirdSpin)
+    isWin(firstSpin, secondSpin, thirdSpin)
 }
