@@ -1,37 +1,51 @@
-#winLine1 {
-  animation: revealWin 3s forwards;
+#winLine1 ~ .reelSymbal {
+  --speed: 3s;
 }
 
+#winLine2 ~ .reelSymbal {
+  --speed: 4s;
+}
+
+#winLine3 ~ .reelSymbal {
+  --speed: 5s;
+}
+
+.winline {
+  animation: revealWin var(--speed) forwards;
+}
+
+
 .animation1{
-  animation: spin1 3s forwards;
+  animation: spin1 var(--speed) forwards;
 }
 .animation2{
-  animation: spin2 3s forwards;
+  animation: spin2 var(--speed) forwards;
 }
 .animation3{
-  animation: spin3 3s forwards;
+  animation: spin3 var(--speed) forwards;
 }
 .animation4{
-  animation: spin4 3s forwards;
+  animation: spin4 var(--speed) forwards;
 }
 .animation5{
-  animation: spin5 3s forwards;
+  animation: spin5 var(--speed) forwards;
 }
 .animation6{
-  animation: spin6 3s forwards;
+  animation: spin6 var(--speed) forwards;
 }
 .animation7{
-  animation: spin7 3s forwards;
+  animation: spin7 var(--speed) forwards;
 }
 .animation8{
-  animation: spin8 3s forwards;
+  animation: spin8 var(--speed) forwards;
 }
 .animation9{
-  animation: spin9 3s forwards;
+  animation: spin9 var(--speed) forwards;
 }
 .animation10{
-  animation: spin10 3s forwards;
+  animation: spin10 var(--speed) forwards;
 }
+
 
 @keyframes spin1 {
   /* reelHolster is 55vh, the animation should go from 0 to 20vh to -20vh */
