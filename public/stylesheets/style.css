@@ -2,6 +2,7 @@ body {
   margin: 0;
   height: 100vh;
   background: linear-gradient(to bottom, #5e005e, #fd2c4f, #fd2c4f, #fd2c4f, black, black, #fd2c4f, #5e005e);
+  font-family: Arial ;
 }
 
 #Accent {

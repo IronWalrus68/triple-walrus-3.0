@@ -9,9 +9,12 @@ let buyIn = 1;
 let firstSpin = 'Spin';
 let secondSpin = 'To';
 let thirdSpin = 'Play!';
-let lastWin = 0
 let lastBet = 1
+let lastWin = 0
 let totalWinnins = 0
+let tempLastWin = lastWin
+let tempTokenValue = tokenValue;
+let tempTotalWinnins = totalWinnins
 let hasWon = false
 
 //utils
@@ -28,10 +31,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 //routes
 //home/main
 app.get('/', (req, res) => {
-    res.render("TripleWalrus", {tokenValue, firstSpin, secondSpin, thirdSpin, lastWin, lastBet, totalWinnins})
+    res.render("TripleWalrus", {tokenValue, firstSpin, secondSpin, thirdSpin, lastWin, lastBet, totalWinnins, tempLastWin, tempTotalWinnins, tempTokenValue, hasWon})
 firstSpin = 'Spin';
 secondSpin = 'To';
 thirdSpin = 'Play!';
+tempLastWin = lastWin
+tempTotalWinnins = totalWinnins
+tempTokenValue = tokenValue - buyIn;
 hasWon = false
 })
 

@@ -62,11 +62,11 @@
                     <div class="winsCollum">
                         <div>
                             <div>Last Win:</div>
-                            <div><%= lastWin %></div>
+                            <div id="lastWin"><%= tempLastWin %></div>
                         </div>
                         <div>
                             <div>Total Winnings:</div>
-                            <div><%= totalWinnins %></div>
+                            <div id="totalWinnins"><%= tempTotalWinnins %></div>
                         </div>
                     </div>
                     <button disabled id="spinButton">Spin!</button>
@@ -76,7 +76,7 @@
                     </div>
                     <div class="winsCollum">
                         <div>Tokens</div>
-                        <%= tokenValue %>
+                        <div id="tokens"><%= tempTokenValue %></div>
                     </div>
                 </div>
             </div>
@@ -84,26 +84,12 @@
         </div>
     </form>
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            var spinButton = document.getElementById('spinButton');
-
-            setTimeout(function () {
-                spinButton.removeAttribute('disabled');
-            }, 5000);
-        });
-        document.addEventListener('DOMContentLoaded', function() {
-      // Add a yellow border to winLine after 5 seconds if hasWon is true
-      if (window.hasWon) {
-        setTimeout(function() {
-          var winLines = document.getElementsByClassName('winLine');
-          for (var i = 0; i < winLines.length; i++) {
-            winLines[i].style.border = '2px solid yellow';
-            winLines[i].style.backgroundColor = 'red'; // Change background color if needed
-          }
-        }, 5000); // 5000 milliseconds (5 seconds)
-      }
-    });
+    var lastWin = '<%= lastWin %>';
+    var totalWinnins = '<%= totalWinnins %>';
+    var tokenValue = '<%= tokenValue %>';
+    var hasWon = '<%= hasWon %>';
     </script>
+    <script src="javascripts/app.js"></script>
 </body>
 
 </html>
