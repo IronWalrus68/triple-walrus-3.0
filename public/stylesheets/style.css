@@ -3,6 +3,7 @@ body {
   height: 100vh;
   background: linear-gradient(to bottom, #5e005e, #fd2c4f, #fd2c4f, #fd2c4f, black, black, #fd2c4f, #5e005e);
   font-family: Arial ;
+  cursor: default;
 }
 
 #Accent {
@@ -94,6 +95,10 @@ body {
 #spinButton:hover {
   box-shadow: 0 0 10px 5px #ffffff;
 }
+#spinButton:disabled {
+  cursor: progress;
+  /* Add any other styles as needed */
+}
 
 #spinButton:active {
   transform: scale(0.95); /* Adjust the scale value based on your preference */
@@ -147,4 +152,15 @@ position: absolute;
     width: auto;
     opacity: 1;
   }
+}
+
+#infoLink{
+  position: absolute;
+  margin-left: 90vw;
+  margin-top: 2vh;
+  cursor: help;
+  color: #000000;
+}
+#infoLink:hover{
+  color: white;
 }

@@ -56,6 +56,10 @@ if(buyIn > tokenValue) {
     res.redirect('/')
 })
 
+app.get('/info', (req, res) => {
+  res.render('info')
+})
+
 //404 
 app.all('*', (req, res, next) => {
     next(new ExpressError('Page Not Found', 404))

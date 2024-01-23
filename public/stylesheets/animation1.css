@@ -33,6 +33,75 @@
   animation: spin10 3s forwards;
 }
 
+#winLine2 {
+  animation: revealWin 4s forwards;
+}
+
+.animation11{
+  animation: spin1 4s forwards;
+}
+.animation12{
+  animation: spin2 4s forwards;
+}
+.animation13{
+  animation: spin3 4s forwards;
+}
+.animation14{
+  animation: spin4 4s forwards;
+}
+.animation15{
+  animation: spin5 4s forwards;
+}
+.animation16{
+  animation: spin6 4s forwards;
+}
+.animation17{
+  animation: spin7 4s forwards;
+}
+.animation18{
+  animation: spin8 4s forwards;
+}
+.animation19{
+  animation: spin9 4s forwards;
+}
+.animation20{
+  animation: spin10 4s forwards;
+}
+
+#winLine3 {
+  animation: revealWin 5s forwards;
+}
+
+.animation21{
+  animation: spin1 5s forwards;
+}
+.animation22{
+  animation: spin2 5s forwards;
+}
+.animation23{
+  animation: spin3 5s forwards;
+}
+.animation24{
+  animation: spin4 5s forwards;
+}
+.animation25{
+  animation: spin5 5s forwards;
+}
+.animation26{
+  animation: spin6 5s forwards;
+}
+.animation27{
+  animation: spin7 5s forwards;
+}
+.animation28{
+  animation: spin8 5s forwards;
+}
+.animation29{
+  animation: spin9 5s forwards;
+}
+.animation30{
+  animation: spin10 5s forwards;
+}
 @keyframes spin1 {
   /* reelHolster is 55vh, the animation should go from 0 to 20vh to -20vh */
   0%{

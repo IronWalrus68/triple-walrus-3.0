@@ -11,10 +11,7 @@ document.addEventListener('DOMContentLoaded', function () {
         lastWinDiv.textContent = lastWin;
         totalWinninsDiv.textContent = totalWinnins;
         tokensDiv.textContent = tokenValue;
-        console.log(hasWon)
         if (hasWon == 'true') {
-        console.log('animation is running')
-            // if (hasWon ) {
             reelHoldsterDiv.style.border = '10px dotted yellow';
             setTimeout(function () {
                 reelHoldsterDiv.style.border = '10px solid black';
