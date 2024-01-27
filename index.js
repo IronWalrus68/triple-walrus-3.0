@@ -87,6 +87,22 @@ app.post('/register', async (req, res) => {
   res.redirect('/')
 })
 
+app.get('/login', (req, res) => {
+  res.render('login')
+})
+
+app.post('/login', async (req, res) => {
+  const { username, password } = req.body;
+  const user = await User.findOne({ username })
+  const validPassword = await bcrypt.compare(password, user.password)
+  if (validPassword) {
+    res.send('Access Granted')
+  } else {
+    res.send('Access Denied')
+  }
+})
+
+//for the love of god remove this route before the app is published
 app.get('/dumpDb', async (req, res) => {
   try {
     const userData = await User.find({});
