@@ -156,11 +156,15 @@ position: absolute;
 
 #infoLink{
   position: absolute;
-  margin-left: 90vw;
+  margin-left: 85vw;
   margin-top: 2vh;
   cursor: help;
   color: #000000;
 }
-#infoLink:hover{
+#infoLink a{
+  cursor: help;
+  color: #000000;
+}
+#infoLink a:hover{
   color: white;
 }
