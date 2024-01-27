@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
-const productSchema = new mongoose.Schema({
-    userName: {
+
+const userSchema = new mongoose.Schema({
+    username: {
         type: String,
         required: [true, 'Username cannot be blank']
     },
@@ -13,3 +14,5 @@ const productSchema = new mongoose.Schema({
         required: [true, 'Email cannot be blank']
     }
 })
+
+module.exports = mongoose.model('User', userSchema);

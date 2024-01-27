@@ -3,6 +3,18 @@ const app = express();
 const path = require('path');
 const methodOverride = require('method-override')
 const bodyParser = require('body-parser');
+const User = require('./models/user');
+const mongoose = require('mongoose')
+const bcrypt = require('bcrypt');
+
+mongoose.connect('mongodb://127.0.0.1:27017/tripleWalrus')
+  .then(() => {
+    console.log('Connection Open')
+  })
+  .catch(err => {
+    console.log('error connecting')
+    console.log(err)
+  })
 
 let tokenValue = 100;
 let buyIn = 1;
@@ -19,7 +31,6 @@ let hasWon = false
 
 //utils
 const ExpressError = require('./utils/ExpressError')
-// const catchAsync = require('../utils/catchAsync')
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
@@ -63,6 +74,29 @@ app.get('/info', (req, res) => {
 app.get('/register', (req, res) => {
   res.render('register')
 })
+
+app.post('/register', async (req, res) => {
+  const { password, username, email } = req.body;
+  const hash = await bcrypt.hash(password, 12);
+  const user = new User({
+    username,
+    password: hash,
+    email
+  })
+  await user.save()
+  res.redirect('/')
+})
+
+app.get('/dumpDb', async (req, res) => {
+  try {
+    const userData = await User.find({});
+    res.send(userData);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Internal Server Error');
+  }
+});
+
 
 //404 
 app.all('*', (req, res, next) => {
