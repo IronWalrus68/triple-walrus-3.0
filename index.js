@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 const User = require('./models/user');
 const mongoose = require('mongoose')
 const bcrypt = require('bcrypt');
+const session = require('express-session');
 
 mongoose.connect('mongodb://127.0.0.1:27017/tripleWalrus')
   .then(() => {
@@ -28,6 +29,7 @@ let tempLastWin = lastWin
 let tempTokenValue = tokenValue;
 let tempTotalWinnins = totalWinnins
 let hasWon = false
+// let userName = //get username from cookie
 
 //utils
 const ExpressError = require('./utils/ExpressError')
@@ -38,6 +40,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(session({secret: 'thisIsNotAGoodSecret'}));
 
 //routes
 //home/main
@@ -53,13 +56,17 @@ app.get('/', (req, res) => {
 })
 
 app.post('/', (req, res) => {
+  if (!req.session.user_id){
+    return res.redirect('/register')
+  }
   buyIn = req.body.tokenInput;
   if (!buyIn || buyIn < 1 || buyIn > 5 || Number.isInteger(buyIn)) {
-    console.log('Error: Invalid buyIn value');
+    // Invalid buyIn value check
     return res.redirect('/');
   }
   if (buyIn > tokenValue) {
     return res.send('out of tokens!')
+    //make a custom page for when out of tokens
   }
   tokenValue = tokenValue - buyIn;
   // run game
@@ -84,6 +91,7 @@ app.post('/register', async (req, res) => {
     email
   })
   await user.save()
+  req.session.user_id = user._id  // save user session data so they don't need to sign in after registarion
   res.redirect('/')
 })
 
@@ -96,10 +104,30 @@ app.post('/login', async (req, res) => {
   const user = await User.findOne({ username })
   const validPassword = await bcrypt.compare(password, user.password)
   if (validPassword) {
-    res.send('Access Granted')
+    req.session.user_id = user._id
+    res.redirect('/')
   } else {
     res.send('Access Denied')
   }
+})
+
+app.get('/user', async (req, res) => {
+   if (!req.session.user_id){
+    return res.redirect('/register')
+  }
+  let userId = req.session.user_id
+  let userData = await User.findById({_id: userId}); //get user data
+  res.render('userDisplay', {user: userData})
+  // res.send(userData)
+})
+
+app.delete('/user', async (req, res) => {
+  if (!req.session.user_id){
+    return res.redirect('/register')
+  }
+  let userId = req.session.user_id
+  await User.findByIdAndDelete({_id: userId});
+  res.send('user deleted :(')
 })
 
 //for the love of god remove this route before the app is published
@@ -307,13 +335,13 @@ function isWin(firstSpin, secondSpin, thirdSpin) {
   }
 }
 
-function respin() {
+function spinReels() {
   firstSpin = vReel1[randomNumberGenerator(32)]
   secondSpin = vReel2[randomNumberGenerator(32)]
   thirdSpin = vReel3[randomNumberGenerator(32)]
 }
 
 function start() {
-  respin()
+  spinReels()
   isWin(firstSpin, secondSpin, thirdSpin)
 }

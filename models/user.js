@@ -12,6 +12,18 @@ const userSchema = new mongoose.Schema({
     email: {
         type: String,
         required: [true, 'Email cannot be blank']
+    },
+    tokenValue: {
+        type: Number,
+        default: 100
+    },
+    lastWin: {
+        type: Number,
+        default: 0
+    },
+    totalWinnins: {
+        type: Number,
+        default: 0
     }
 })
 
