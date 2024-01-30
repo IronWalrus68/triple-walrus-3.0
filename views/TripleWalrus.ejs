@@ -10,10 +10,14 @@
 </head>
 <div id="infoLink">
 <a href="/info">info</a>
-|
-<a href="/register">Register</a>
-|
-<a href="/login">login</a>
+    |
+    <% if ( userName==null) { %>
+        <a href="/register">Register</a> | <a href="/login">Login</a>
+        <% } else { %>
+            <a href="/user">
+                <%= userName %>
+            </a>
+            <% } %>
 </div>
 <body>
     <form action="/" method="post">

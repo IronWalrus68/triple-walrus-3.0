@@ -17,6 +17,7 @@ mongoose.connect('mongodb://127.0.0.1:27017/tripleWalrus')
     console.log(err)
   })
 
+// let tokenValue = User.tokenValue;
 let tokenValue = 100;
 let buyIn = 1;
 let firstSpin = 'Spin';
@@ -25,11 +26,11 @@ let thirdSpin = 'Play!';
 let lastBet = 1
 let lastWin = 0
 let totalWinnins = 0
-let tempLastWin = lastWin
+let tempLastWin = null
 let tempTokenValue = tokenValue;
 let tempTotalWinnins = totalWinnins
 let hasWon = false
-// let userName = //get username from cookie
+let userName = null
 
 //utils
 const ExpressError = require('./utils/ExpressError')
@@ -45,7 +46,7 @@ app.use(session({secret: 'thisIsNotAGoodSecret'}));
 //routes
 //home/main
 app.get('/', (req, res) => {
-  res.render("TripleWalrus", { tokenValue, firstSpin, secondSpin, thirdSpin, lastWin, lastBet, totalWinnins, tempLastWin, tempTotalWinnins, tempTokenValue, hasWon })
+  res.render("TripleWalrus", { tokenValue, firstSpin, secondSpin, thirdSpin, lastWin, lastBet, totalWinnins, tempLastWin, tempTotalWinnins, tempTokenValue, hasWon, userName })
   firstSpin = 'Spin';
   secondSpin = 'To';
   thirdSpin = 'Play!';
@@ -54,6 +55,14 @@ app.get('/', (req, res) => {
   tempTokenValue = tokenValue - buyIn;
   hasWon = false
 })
+
+//functions
+
+//login
+async function login(req, res, user) {
+  req.session.user_id = user._id
+  userName = user.username
+}
 
 app.post('/', (req, res) => {
   if (!req.session.user_id){
@@ -84,14 +93,22 @@ app.get('/register', (req, res) => {
 
 app.post('/register', async (req, res) => {
   const { password, username, email } = req.body;
+  // Check if the username is already in use
+  const existingUser = await User.findOne({ username });
+  if (existingUser) {
+    return res.send('Username already in use. Please choose another.');
+  }
+  //hashpassword
   const hash = await bcrypt.hash(password, 12);
+  //save to db
   const user = new User({
     username,
     password: hash,
     email
   })
   await user.save()
-  req.session.user_id = user._id  // save user session data so they don't need to sign in after registarion
+  //login user after registration
+  await login(req, res, user) 
   res.redirect('/')
 })
 
@@ -101,18 +118,23 @@ app.get('/login', (req, res) => {
 
 app.post('/login', async (req, res) => {
   const { username, password } = req.body;
+  try {
   const user = await User.findOne({ username })
   const validPassword = await bcrypt.compare(password, user.password)
   if (validPassword) {
-    req.session.user_id = user._id
+    await login(req, res, user)
     res.redirect('/')
   } else {
-    res.send('Access Denied')
+    return res.send('Username or password could not be found')
+  }
+  } catch {
+    return res.send('Username or password could not be found')
   }
 })
 
 app.post('/logout', (req, res) => {
   req.session.user_id = null;
+  userName = null
   res.redirect('/login')
 })
 
@@ -126,13 +148,20 @@ app.get('/user', async (req, res) => {
   // res.send(userData)
 })
 
-app.delete('/user', async (req, res) => {
+app.get('/delete', (req, res) => {
   if (!req.session.user_id){
     return res.redirect('/register')
   }
-  let userId = req.session.user_id
-  await User.findByIdAndDelete({_id: userId});
-  res.send('user deleted :(')
+  res.render('deletePage')
+})
+
+app.post('/deleteConfirm', async (req, res) => {
+  // find user id and delete
+  const id = req.session.user_id;
+  await User.findByIdAndDelete(id)
+  req.session.user_id = null;
+  userName = null
+  res.redirect('/')
 })
 
 //for the love of god remove this route before the app is published
