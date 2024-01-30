@@ -67,19 +67,10 @@
     <li>Total Winnings: <%= user.totalWinnings %></li>
   </ul>
 
-  <!-- Back button -->
-  <form action="/" method="get">
-    <button type="submit">Back</button>
+  <!-- logout button -->
+  <form action="/logout" method="post">
+    <button>Logout</button>
   </form>
 
-  <!-- Delete button -->
-  <form action="/user" method="post">
-    <input type="hidden" name="_method" value="DELETE">
-    <button type="submit">Delete</button>
-  </form>
-
-  <form action="/user" method="POST">
-<button>Delete2</button>
-    </form>
 </body>
 </html>

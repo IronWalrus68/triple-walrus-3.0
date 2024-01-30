@@ -111,6 +111,11 @@ app.post('/login', async (req, res) => {
   }
 })
 
+app.post('/logout', (req, res) => {
+  req.session.user_id = null;
+  res.redirect('/login')
+})
+
 app.get('/user', async (req, res) => {
    if (!req.session.user_id){
     return res.redirect('/register')
