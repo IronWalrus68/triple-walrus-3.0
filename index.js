@@ -41,11 +41,11 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(session({secret: 'thisIsNotAGoodSecret'}));
+app.use(session({ secret: 'thisIsNotAGoodSecret' }));
 
 //routes
 //home/main
-app.get('/', (req, res) => {
+app.get('/', async (req, res) => {
   res.render("TripleWalrus", { tokenValue, firstSpin, secondSpin, thirdSpin, lastWin, lastBet, totalWinnins, tempLastWin, tempTotalWinnins, tempTokenValue, hasWon, userName })
   firstSpin = 'Spin';
   secondSpin = 'To';
@@ -65,7 +65,7 @@ async function login(req, res, user) {
 }
 
 app.post('/', async (req, res) => {
-  if (!req.session.user_id){
+  if (!req.session.user_id) {
     return res.redirect('/register')
   }
   buyIn = req.body.tokenInput;
@@ -79,7 +79,7 @@ app.post('/', async (req, res) => {
   }
   //get user data
   let userId = req.session.user_id
-  let userData = await User.findById({_id: userId}); 
+  let userData = await User.findById({ _id: userId });
   console.log(userData)
   tokenValue = userData.tokenValue - buyIn;
   // run game
@@ -87,13 +87,17 @@ app.post('/', async (req, res) => {
   //update tokenValue, last win and total winnings and save them to the db before redirecting
   //save the new values to the db
   await User.findByIdAndUpdate(
-  { _id: userId },
-  { $set: { tokenValue: tokenValue } },
-  { $set: { lastWin: lastWin } },
-  { $set: { totalWinnins: totalWinnins } },
-  { new: true }, // to return the updated document
-  
-);
+    { _id: userId },
+    {
+      $set: {
+        tokenValue: tokenValue,
+        lastWin: lastWin,
+        totalWinnins: totalWinnins
+      }
+    },
+    { new: true }, // to return the updated document
+
+  );
   res.redirect('/')
 })
 
@@ -122,7 +126,7 @@ app.post('/register', async (req, res) => {
   })
   await user.save()
   //login user after registration
-  await login(req, res, user) 
+  await login(req, res, user)
   res.redirect('/')
 })
 
@@ -133,14 +137,14 @@ app.get('/login', (req, res) => {
 app.post('/login', async (req, res) => {
   const { username, password } = req.body;
   try {
-  const user = await User.findOne({ username })
-  const validPassword = await bcrypt.compare(password, user.password)
-  if (validPassword) {
-    await login(req, res, user)
-    res.redirect('/')
-  } else {
-    return res.send('Username or password could not be found')
-  }
+    const user = await User.findOne({ username })
+    const validPassword = await bcrypt.compare(password, user.password)
+    if (validPassword) {
+      await login(req, res, user)
+      res.redirect('/')
+    } else {
+      return res.send('Username or password could not be found')
+    }
   } catch {
     return res.send('Username or password could not be found')
   }
@@ -149,21 +153,23 @@ app.post('/login', async (req, res) => {
 app.post('/logout', (req, res) => {
   req.session.user_id = null;
   userName = null
+  tempLastWin = 0
+  tempTotalWinnins = 0
   res.redirect('/login')
 })
 
 app.get('/user', async (req, res) => {
-   if (!req.session.user_id){
+  if (!req.session.user_id) {
     return res.redirect('/register')
   }
   let userId = req.session.user_id
-  let userData = await User.findById({_id: userId}); //get user data
-  res.render('userDisplay', {user: userData})
+  let userData = await User.findById({ _id: userId }); //get user data
+  res.render('userDisplay', { user: userData })
   // res.send(userData)
 })
 
 app.get('/delete', (req, res) => {
-  if (!req.session.user_id){
+  if (!req.session.user_id) {
     return res.redirect('/register')
   }
   res.render('deletePage')
