@@ -1,7 +1,7 @@
 body {
   margin: 0;
   height: 100vh;
-  background: linear-gradient(to bottom, #5e005e, #fd2c4f, #fd2c4f, #fd2c4f, black, black, #fd2c4f, #5e005e);
+  background: linear-gradient(to bottom, #8e44ad, #411f50);
   font-family: Arial ;
   cursor: default;
 }
@@ -50,7 +50,7 @@ body {
   width: 75vw;
   margin-top: 3vh;
   border-radius: 20px;
-  background-color: #ffed47;
+  background: rgba(255, 237, 71,0.95);
 }
 
 #uiInline {
