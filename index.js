@@ -17,8 +17,8 @@ mongoose.connect('mongodb://127.0.0.1:27017/tripleWalrus')
     console.log(err)
   })
 
-// let tokenValue = User.tokenValue;
-let tokenValue = 100;
+let tokenValue = User.tokenValue;
+// let tokenValue = 100;
 let buyIn = 1;
 let firstSpin = 'Spin';
 let secondSpin = 'To';
@@ -64,7 +64,7 @@ async function login(req, res, user) {
   userName = user.username
 }
 
-app.post('/', (req, res) => {
+app.post('/', async (req, res) => {
   if (!req.session.user_id){
     return res.redirect('/register')
   }
@@ -77,9 +77,23 @@ app.post('/', (req, res) => {
     return res.send('out of tokens!')
     //make a custom page for when out of tokens
   }
-  tokenValue = tokenValue - buyIn;
+  //get user data
+  let userId = req.session.user_id
+  let userData = await User.findById({_id: userId}); 
+  console.log(userData)
+  tokenValue = userData.tokenValue - buyIn;
   // run game
   start()
+  //update tokenValue, last win and total winnings and save them to the db before redirecting
+  //save the new values to the db
+  await User.findByIdAndUpdate(
+  { _id: userId },
+  { $set: { tokenValue: tokenValue } },
+  { $set: { lastWin: lastWin } },
+  { $set: { totalWinnins: totalWinnins } },
+  { new: true }, // to return the updated document
+  
+);
   res.redirect('/')
 })
 
