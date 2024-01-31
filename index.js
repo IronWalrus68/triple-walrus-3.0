@@ -26,7 +26,7 @@ let thirdSpin = 'Play!';
 let lastBet = 1
 let lastWin = 0
 let totalWinnins = 0
-let tempLastWin = null
+let tempLastWin = lastWin
 let tempTokenValue = tokenValue;
 let tempTotalWinnins = totalWinnins
 let hasWon = false
@@ -52,7 +52,7 @@ app.get('/', (req, res) => {
   thirdSpin = 'Play!';
   tempLastWin = lastWin
   tempTotalWinnins = totalWinnins
-  tempTokenValue = tokenValue - buyIn;
+  tempTokenValue = tokenValue;
   hasWon = false
 })
 
@@ -376,6 +376,7 @@ function spinReels() {
 }
 
 function start() {
+  tempTokenValue = tokenValue;
   spinReels()
   isWin(firstSpin, secondSpin, thirdSpin)
 }
