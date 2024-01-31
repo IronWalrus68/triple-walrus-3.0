@@ -46,6 +46,12 @@ app.use(session({ secret: 'thisIsNotAGoodSecret' }));
 //routes
 //home/main
 app.get('/', async (req, res) => {
+  if (req.session.user_id) {
+    let userId = req.session.user_id
+  let userData = await User.findById({ _id: userId });
+  tempLastWin = userData.lastWin
+  tempTotalWinnins = userData.totalWinnins
+  }
   res.render("TripleWalrus", { tokenValue, firstSpin, secondSpin, thirdSpin, lastWin, lastBet, totalWinnins, tempLastWin, tempTotalWinnins, tempTokenValue, hasWon, userName })
   firstSpin = 'Spin';
   secondSpin = 'To';
@@ -80,8 +86,9 @@ app.post('/', async (req, res) => {
   //get user data
   let userId = req.session.user_id
   let userData = await User.findById({ _id: userId });
-  console.log(userData)
   tokenValue = userData.tokenValue - buyIn;
+  lastWin = userData.lastWin
+  totalWinnins = userData.totalWinnins
   // run game
   start()
   //update tokenValue, last win and total winnings and save them to the db before redirecting
@@ -155,6 +162,8 @@ app.post('/logout', (req, res) => {
   userName = null
   tempLastWin = 0
   tempTotalWinnins = 0
+  lastWin = 0;
+  totalWinnins = 0;
   res.redirect('/login')
 })
 
